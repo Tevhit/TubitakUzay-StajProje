@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd">
+
+	<!-- do not use import statements if CXFServlet init parameters link to 
+		this beans.xml -->
+
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+
+	<jaxrs:server id="base" address="/service">
+		<jaxrs:serviceBeans>
+			<ref bean="book_service" />
+			<ref bean="author_service" />
+			<ref bean="language_code_service" />
+			<ref bean="publisher_service" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<bean id="book_service" class="services.BooksService" />
+	<bean id="author_service" class="services.AuthorsService" />
+	<bean id="language_code_service" class="services.LanguageCodesService" />
+	<bean id="publisher_service" class="services.PublishersService" />
+
+</beans>
